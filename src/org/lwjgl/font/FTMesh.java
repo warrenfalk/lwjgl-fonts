@@ -13,8 +13,7 @@ import java.util.List;
 /**
  * FTMesh is a container of FTTesselation's that make up a polygon glyph
  */
-public class FTMesh
-{
+public class FTMesh {
 
 	/**
 	 * The current sub mesh that we are constructing.
@@ -39,35 +38,30 @@ public class FTMesh
 	/**
 	 * Default constructor
 	 */
-	public FTMesh()
-	{
-		this.currentTesselation = null;
-		this.err = 0;
+	public FTMesh() {
+		currentTesselation = null;
+		err = 0;
 		ArrayList<FTTesselation> help = new ArrayList<FTTesselation>();
 		help.ensureCapacity(16);
 		tesselationList = help;
-		this.tempPointList = new LinkedList<double[]>();
+		tempPointList = new LinkedList<double[]>();
 	}
 
 	/**
 	 * Destructor
 	 */
-	public void dispose()
-	{
-		for (int t = 0; t < this.tesselationList.size(); ++t)
-		{
-			this.tesselationList.get(t).dispose();
-		}
-		this.tesselationList.clear();
-		this.tempPointList.clear();
+	public void dispose() {
+		for (int t = 0; t < tesselationList.size(); ++t)
+			tesselationList.get(t).dispose();
+		tesselationList.clear();
+		tempPointList.clear();
 	}
 
 	/**
 	 * 
 	 */
-	public void addPoint(double[] point)
-	{
-		this.currentTesselation.addPoint(point);
+	public void addPoint(double[] point) {
+		currentTesselation.addPoint(point);
 	}
 
 	/**
@@ -81,10 +75,9 @@ public class FTMesh
 	// //return &tempPointList.back().x;
 	// return v;
 	// }
-	public double[] combine(final double[] help)
-	{
+	public double[] combine(final double[] help) {
 		// double [] v = new double[] {x,y,z};
-		this.tempPointList.add(help);
+		tempPointList.add(help);
 		// return &tempPointList.back().x;
 		return help;
 	}
@@ -92,27 +85,25 @@ public class FTMesh
 	/**
 	 * 
 	 */
-	public void begin(int meshType)
-	{
-		this.currentTesselation = new FTTesselation(meshType);
+	public void begin(int meshType) {
+		currentTesselation = new FTTesselation(meshType);
 	}
 
 	/**
 	 * 
 	 */
-	public void end()
-	{
-		this.tesselationList.add(currentTesselation);
+	public void end() {
+		tesselationList.add(currentTesselation);
 	}
 
 	/**
 	 * Used to set the GL ERROR returned by the glu tesselator.
 	 * 
-	 * @param e new error code
+	 * @param e
+	 *            new error code
 	 */
-	public void setError(int e)
-	{
-		this.err = e;
+	public void setError(int e) {
+		err = e;
 	}
 
 	/**
@@ -122,7 +113,7 @@ public class FTMesh
 	 */
 	public int tesselationCount() // const
 	{
-		return this.tesselationList.size();
+		return tesselationList.size();
 	}
 
 	/**
@@ -130,7 +121,7 @@ public class FTMesh
 	 */
 	public FTTesselation getTesselation(int index) // const;
 	{
-		return this.tesselationList.get(index);
+		return tesselationList.get(index);
 	}
 
 	/**
@@ -138,7 +129,7 @@ public class FTMesh
 	 */
 	public List<double[]> getTempPointList() // const
 	{
-		return this.tempPointList;
+		return tempPointList;
 	}
 
 	/**
@@ -146,6 +137,6 @@ public class FTMesh
 	 */
 	public int getError() // const
 	{
-		return this.err;
+		return err;
 	}
 }

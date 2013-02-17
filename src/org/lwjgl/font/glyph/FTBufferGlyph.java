@@ -10,14 +10,12 @@ import java.awt.image.BufferedImage;
 
 import org.lwjgl.font.FTGlyphContainer;
 
-
 /**
  * FTBufferGlyph is a specialisation of FTGlyph for creating pixmaps.
  * 
  * @see FTGlyphContainer
  */
-public class FTBufferGlyph extends FTGlyph
-{
+public class FTBufferGlyph extends FTGlyph {
 
 	/**
 	 * The width of the glyph 'image'
@@ -53,73 +51,67 @@ public class FTBufferGlyph extends FTGlyph
 	/**
 	 * Constructor
 	 * 
-	 * @param glyph The Freetype glyph to be processed
+	 * @param glyph
+	 *            The Freetype glyph to be processed
 	 */
-	public FTBufferGlyph(Shape glyph, byte[] clientBuffer, float advance)
-	{
+	public FTBufferGlyph(Shape glyph, byte[] clientBuffer, float advance) {
 		super(glyph, advance);
-		this.buffer = clientBuffer;
+		buffer = clientBuffer;
 
 		Rectangle bounds = this.glyph.getBounds();
 
-		this.destWidth = bounds.width;
-		this.destHeight = bounds.height;
+		destWidth = bounds.width;
+		destHeight = bounds.height;
 
-		if (this.destWidth == 0 || this.destHeight == 0)
-		{
-			this.offsetX = 0;
-			this.offsetY = 0;
+		if (destWidth == 0 || destHeight == 0) {
+			offsetX = 0;
+			offsetY = 0;
 			return;
 		}
 
 		// int[] rgbarray = new int[this.destWidth*this.destHeight];
 
 		BufferedImage image = new BufferedImage(bounds.width, bounds.height,
-			BufferedImage.TYPE_BYTE_GRAY);
-		Graphics2D g2d = (Graphics2D)image.getGraphics();
+				BufferedImage.TYPE_BYTE_GRAY);
+		Graphics2D g2d = (Graphics2D) image.getGraphics();
 		g2d.scale(1.0f, -1.0f);
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(0, 0, bounds.width, bounds.height);
 		g2d.setColor(Color.WHITE);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.translate(-this.glyph.getBounds2D().getX(), -this.glyph.getBounds2D().getY()
-			- this.destHeight + 1);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.translate(-this.glyph.getBounds2D().getX(), -this.glyph
+				.getBounds2D().getY() - destHeight + 1);
 		g2d.fill(this.glyph);
 
-		this.destPitch = this.destWidth;
+		destPitch = destWidth;
 
-		if (destWidth > 0 && destHeight > 0)
-		{
+		if (destWidth > 0 && destHeight > 0) {
 			// allows for close to one byte loss at the end of a row
 			// Note: each start of a row has to be aligned at byte level
-			data = new byte[(int)Math.ceil((destPitch + 7) * destHeight / 8f)];
+			data = new byte[(int) Math.ceil((destPitch + 7) * destHeight / 8f)];
 
 			// Note: the first bit of each row must start at a new byte
 			int pow = 0;
 			int posi = 0;
 			byte value = 0;
-			for (int i = 0; i < this.destHeight; i++)
-			{
-				for (int j = 0; j < this.destPitch; j++)
-				{
-					value |= (byte)(image.getRGB(j, i) & 1);
+			for (int i = 0; i < destHeight; i++) {
+				for (int j = 0; j < destPitch; j++) {
+					value |= (byte) (image.getRGB(j, i) & 1);
 					pow++;
-					if (pow > 7)
-					{
+					if (pow > 7) {
 						pow = 0;
 						data[posi++] = value;
 						value = 0;
-					}
-					else
-						value = (byte)(value << 1);
+					} else
+						value = (byte) (value << 1);
 				}
 				// is the last byte of this row not saved yet ?
-				if (pow != 0)
-				{
+				if (pow != 0) {
 					// write data & jump to the next free byte
 					data[posi++] =
 					// move last bits of the row to the byte's highest bits
-					(byte)(value << (7 - pow));
+					(byte) (value << (7 - pow));
 					pow = 0;
 					value = 0;
 				}
@@ -137,29 +129,29 @@ public class FTBufferGlyph extends FTGlyph
 			// }
 		}
 
-		this.offsetX = glyph.getBounds2D().getX();
-		this.offsetY = -glyph.getBounds2D().getY();
+		offsetX = glyph.getBounds2D().getX();
+		offsetY = -glyph.getBounds2D().getY();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void dispose()
-	{
+	@Override
+	public void dispose() {
 		super.dispose();
-		this.data = null;
+		data = null;
 	}
 
-	protected void createDisplayList()
-	{
+	@Override
+	protected void createDisplayList() {
 
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public float render(final float x, final float y, final float z)
-	{
+	@Override
+	public float render(final float x, final float y, final float z) {
 		return advance;
 	}
 

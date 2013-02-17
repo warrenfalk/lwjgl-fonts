@@ -5,27 +5,28 @@ package org.lwjgl.font.util;
 
 /**
  * Some methods, to make the life easier.
+ * 
  * @author funsheep
  */
-public class FTMath
-{
+public class FTMath {
 
 	/**
 	 * Generates the next power of two.
-	 * @param in An int.
+	 * 
+	 * @param in
+	 *            An int.
 	 * @return The next power of two.
 	 */
-	public static final int nextPowerOf2(int in)
-	{
-		 in -= 1;
+	public static final int nextPowerOf2(int in) {
+		in -= 1;
 
-		 in |= in >> 16;
-		 in |= in >> 8;
-		 in |= in >> 4;
-		 in |= in >> 2;
-		 in |= in >> 1;
+		in |= in >> 16;
+		in |= in >> 8;
+		in |= in >> 4;
+		in |= in >> 2;
+		in |= in >> 1;
 
-		 return in + 1;
+		return in + 1;
 	}
 
 }

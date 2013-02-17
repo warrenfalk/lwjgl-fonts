@@ -9,68 +9,74 @@ import org.lwjgl.font.glyph.FTBitmapGlyph;
 import org.lwjgl.font.glyph.FTGlyph;
 import org.lwjgl.opengl.GL11;
 
-
 /**
- * FTGLBitmapFont is a specialisation of the FTFont class for handling Bitmap fonts
+ * FTGLBitmapFont is a specialisation of the FTFont class for handling Bitmap
+ * fonts
  * 
  * @see FTFont
  */
-public class FTGLBitmapFont extends FTFont
-{
-
+public class FTGLBitmapFont extends FTFont {
 
 	/**
 	 * Open and read a font file. Sets Error flag.
-	 * @param fontname font file name.
+	 * 
+	 * @param fontname
+	 *            font file name.
 	 */
-	public FTGLBitmapFont(String fontname)
-	{
+	public FTGLBitmapFont(String fontname) {
 		this(Font.decode(fontname));
 	}
 
 	/**
-	 * Creates a new font from the given font with the standard FontRenderContext.
-	 * @param font The font from which to construct this FTFont.
+	 * Creates a new font from the given font with the standard
+	 * FontRenderContext.
+	 * 
+	 * @param font
+	 *            The font from which to construct this FTFont.
 	 */
-	public FTGLBitmapFont(Font font)
-	{
+	public FTGLBitmapFont(Font font) {
 		this(font, FTFont.STANDARDCONTEXT);
 	}
 
 	/**
-	 * Reads the font from the given font name and renders the font to the given fontrendercontext.
-	 * @param fontname The fontname.
-	 * @param context The FontRenderContext to render with.
+	 * Reads the font from the given font name and renders the font to the given
+	 * fontrendercontext.
+	 * 
+	 * @param fontname
+	 *            The fontname.
+	 * @param context
+	 *            The FontRenderContext to render with.
 	 */
-	public FTGLBitmapFont(final String fontname, final FontRenderContext context)
-	{
+	public FTGLBitmapFont(final String fontname, final FontRenderContext context) {
 		this(Font.decode(fontname), context);
 	}
 
 	/**
-	 * Creates the FTFont from the given {@link Font} and renders it to the given fontrendercontext.
-	 * @param font	The font to create this FTFont from.
-	 * @param context The rendercontext to render the glyphs with.
+	 * Creates the FTFont from the given {@link Font} and renders it to the
+	 * given fontrendercontext.
+	 * 
+	 * @param font
+	 *            The font to create this FTFont from.
+	 * @param context
+	 *            The rendercontext to render the glyphs with.
 	 */
-	public FTGLBitmapFont(final Font font, final FontRenderContext context)
-	{
+	public FTGLBitmapFont(final Font font, final FontRenderContext context) {
 		super(font, context);
 	}
-
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void dispose()
-	{
+	@Override
+	public void dispose() {
 		super.dispose();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void render(String string)
-	{
+	@Override
+	public void render(String string) {
 		GL11.glPushClientAttrib(GL11.GL_CLIENT_PIXEL_STORE_BIT);
 		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 
@@ -88,11 +94,10 @@ public class FTGLBitmapFont extends FTFont
 	/**
 	 * {@inheritDoc}
 	 */
-	protected FTGlyph makeGlyph(Shape ftGlyph, float advance)
-	{
+	@Override
+	protected FTGlyph makeGlyph(Shape ftGlyph, float advance) {
 
-		if (ftGlyph != null)
-		{
+		if (ftGlyph != null) {
 			FTBitmapGlyph tempGlyph = new FTBitmapGlyph(ftGlyph, advance);
 			return tempGlyph;
 		}

@@ -3,15 +3,13 @@
  */
 package org.lwjgl.font.util;
 
-
 /**
  * Implementation of the 4 dimensional vector.
  * 
  * @author Ralf Petring
  * @author funsheep
  */
-public class Vector4f implements Cloneable
-{
+public class Vector4f implements Cloneable {
 	/** x component */
 	public float x;
 	/** y component */
@@ -24,21 +22,23 @@ public class Vector4f implements Cloneable
 	/**
 	 * Constructs a new vector whith (0,0,0,1) as coordinates.
 	 */
-	public Vector4f()
-	{
+	public Vector4f() {
 		this(0, 0, 0, 1);
 	}
 
 	/**
 	 * Creates a new vector.
 	 * 
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 * @param z the z coordinate
-	 * @param w the w coordinate
+	 * @param x
+	 *            the x coordinate
+	 * @param y
+	 *            the y coordinate
+	 * @param z
+	 *            the z coordinate
+	 * @param w
+	 *            the w coordinate
 	 */
-	public Vector4f(final float x, final float y, final float z, final float w)
-	{
+	public Vector4f(final float x, final float y, final float z, final float w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -48,88 +48,94 @@ public class Vector4f implements Cloneable
 	/**
 	 * Copyconstructor.
 	 * 
-	 * @param v the vector to copy
+	 * @param v
+	 *            the vector to copy
 	 */
-	public Vector4f(final Vector4f v)
-	{
+	public Vector4f(final Vector4f v) {
 		this(v.x, v.y, v.z, v.w);
 	}
 
 	/**
 	 * Adds the given values to this vector.
 	 * 
-	 * @param dx the x value to add
-	 * @param dy the y value to add
-	 * @param dz the z value to add
+	 * @param dx
+	 *            the x value to add
+	 * @param dy
+	 *            the y value to add
+	 * @param dz
+	 *            the z value to add
 	 * @return this vector
 	 */
-	public Vector4f add(final float dx, final float dy, final float dz)
-	{
-		this.x += dx;
-		this.y += dy;
-		this.z += dz;
+	public Vector4f add(final float dx, final float dy, final float dz) {
+		x += dx;
+		y += dy;
+		z += dz;
 		return this;
 	}
 
 	/**
 	 * Adds a vector to this vector.
 	 * 
-	 * @param v the vector to add
+	 * @param v
+	 *            the vector to add
 	 * @return this vector
 	 */
-	public Vector4f add(final Vector4f v)
-	{
+	public Vector4f add(final Vector4f v) {
 		return this.add(v.x, v.y, v.z);
 	}
 
 	/**
 	 * Substracts the given values from this vector.
 	 * 
-	 * @param dx the x value to substract
-	 * @param dy the y value to substract
-	 * @param dz the z value to substract
+	 * @param dx
+	 *            the x value to substract
+	 * @param dy
+	 *            the y value to substract
+	 * @param dz
+	 *            the z value to substract
 	 * @return this vector
 	 */
-	public Vector4f sub(final float dx, final float dy, final float dz)
-	{
+	public Vector4f sub(final float dx, final float dy, final float dz) {
 		return this.add(-dx, -dy, -dz);
 	}
 
 	/**
 	 * Substracts a given vector from this one.
 	 * 
-	 * @param v the vector to substract
+	 * @param v
+	 *            the vector to substract
 	 * @return this vector
 	 */
-	public Vector4f sub(final Vector4f v)
-	{
+	public Vector4f sub(final Vector4f v) {
 		return this.add(-v.x, -v.y, -v.z);
 	}
 
 	/**
 	 * Multiplies the coordinates of this vector with the given float values.
 	 * 
-	 * @param dx the value to be multiplied the x coordinate
-	 * @param dy the value to be multiplied the y coordinate
-	 * @param dz the value to be multiplied the z coordinate
+	 * @param dx
+	 *            the value to be multiplied the x coordinate
+	 * @param dy
+	 *            the value to be multiplied the y coordinate
+	 * @param dz
+	 *            the value to be multiplied the z coordinate
 	 * @return this vector
 	 */
-	public Vector4f scale(final float dx, final float dy, final float dz)
-	{
-		this.x *= dx;
-		this.y *= dy;
-		this.z *= dz;
+	public Vector4f scale(final float dx, final float dy, final float dz) {
+		x *= dx;
+		y *= dy;
+		z *= dz;
 		return this;
 	}
 
 	/**
 	 * Multiplies the coordinates of this vector with the given float value.
 	 * 
-	 * @param d the value to be multiplied with all coordinates
+	 * @param d
+	 *            the value to be multiplied with all coordinates
 	 * @return this vector
 	 */
-	public Vector4f scale(final float d)
-	{
+	public Vector4f scale(final float d) {
 		return this.scale(d, d, d);
 	}
 
@@ -138,9 +144,8 @@ public class Vector4f implements Cloneable
 	 * 
 	 * @return the squared length of this vector
 	 */
-	public final float lengthSquared()
-	{
-		return (this.x * this.x + this.y * this.y + this.z * this.z); //TODO needs w?
+	public final float lengthSquared() {
+		return (x * x + y * y + z * z); // TODO needs w?
 	}
 
 	/**
@@ -148,10 +153,9 @@ public class Vector4f implements Cloneable
 	 * 
 	 * @return the length of this vector
 	 */
-	public final float length()
-	{
-		//TODO needs w?
-		return (float)Math.sqrt(this.lengthSquared());
+	public final float length() {
+		// TODO needs w?
+		return (float) Math.sqrt(lengthSquared());
 	}
 
 	/**
@@ -159,14 +163,13 @@ public class Vector4f implements Cloneable
 	 * 
 	 * @return this vector
 	 */
-	public final Vector4f normalize()
-	{
-		//TODO needs w?
-		float norm = 1f/this.length();
+	public final Vector4f normalize() {
+		// TODO needs w?
+		float norm = 1f / length();
 
-		this.x *= norm;
-		this.y *= norm;
-		this.z *= norm;
+		x *= norm;
+		y *= norm;
+		z *= norm;
 
 		return this;
 	}
@@ -174,25 +177,22 @@ public class Vector4f implements Cloneable
 	/**
 	 * Calculates the dotprodukt of this vector and the given vector.
 	 * 
-	 * @param v the second vector
+	 * @param v
+	 *            the second vector
 	 * @return the scalarproduct between this and the second vector
 	 */
-	public final float dot(final Vector4f v)
-	{
-		return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w; //TODO w component also?
+	public final float dot(final Vector4f v) {
+		return x * v.x + y * v.y + z * v.z + w * v.w; // TODO w component also?
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public Object clone()
-	{
-		try
-		{
+	@Override
+	public Object clone() {
+		try {
 			return super.clone();
-		}
-		catch (CloneNotSupportedException e)
-		{
+		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException("the roof is on fire", e);
 		}
 	}
@@ -200,9 +200,9 @@ public class Vector4f implements Cloneable
 	/**
 	 * {@inheritDoc}
 	 */
-	public String toString()
-	{
-		return "[" + this.x + "," + this.y + "," + this.z + "," + this.w + "]";
+	@Override
+	public String toString() {
+		return "[" + x + "," + y + "," + z + "," + w + "]";
 	}
 
 }
