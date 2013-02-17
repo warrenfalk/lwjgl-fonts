@@ -174,7 +174,7 @@ public class FTPixmapGlyph extends FTGlyph
 			GL11.glBitmap( 0, 0, 0.0f, 0.0f, (float)x + this.offsetX, (float)y + this.offsetY, this.data); // TODO: used to pass null, but now passing this.data -- not sure if correct
 
 			GL11.glPixelStorei(GL11.GL_UNPACK_ROW_LENGTH, 0);
-
+			this.data.rewind();
 			GL11.glDrawPixels( destWidth, destHeight, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, this.data);
 
 			// Restore the glyph origin

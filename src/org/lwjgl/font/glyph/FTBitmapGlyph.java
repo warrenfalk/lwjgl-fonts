@@ -151,7 +151,7 @@ public class FTBitmapGlyph extends FTGlyph
 
 			GL11.glPixelStorei(GL11.GL_UNPACK_ROW_LENGTH, destPitch);
 			data.rewind();
-			GL11.glBitmap(destWidth, destHeight, 0.0f, 0.0f, 0.0f, 0.0f, data);
+			GL11.glBitmap(destWidth, destHeight, -x + offsetX, y + offsetY, 0.0f, 0.0f, data);
 
 			//GL11.glBitmap(0, 0, 0.0f, 0.0f, (float) (-x - this.offsetX), (float) (-y + this.offsetY), null );
 		}
