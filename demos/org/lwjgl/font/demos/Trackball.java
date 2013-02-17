@@ -4,7 +4,6 @@
 package org.lwjgl.font.demos;
 
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.nio.FloatBuffer;
 
