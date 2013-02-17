@@ -40,6 +40,7 @@ import org.lwjgl.font.FTVectoriser;
  */
 class GlyphPanel extends Panel
 {
+	private static final long serialVersionUID = 1L;
 	private final static double BORDER = 10;
 	/**
 	 * Allows to adjust the glyphs flatness.
@@ -48,7 +49,7 @@ class GlyphPanel extends Panel
 
 	private Font font;
 	private GlyphVector glyphs;
-	private List contours = new LinkedList();
+	private List<GeneralPath> contours = new LinkedList<GeneralPath>();
 	private JLabel status;
 
 	/**
@@ -106,7 +107,7 @@ class GlyphPanel extends Panel
 		GeneralPath j2d = new GeneralPath();
 		j2d.append(this.glyphs.getOutline().getPathIterator(null, Double.POSITIVE_INFINITY), false);
 
-		Iterator iter = this.contours.iterator();
+		Iterator<GeneralPath> iter = this.contours.iterator();
 		while (iter.hasNext())
 		{
 			Shape ftShape = (Shape)iter.next();
@@ -154,6 +155,8 @@ class GlyphPanel extends Panel
  */
 public class JavaGlyphTest extends JFrame
 {
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
@@ -195,7 +198,7 @@ public class JavaGlyphTest extends JFrame
 
 		JFrame f = new JavaGlyphTest(font.deriveFont(270f), text);
 		f.setSize(320,240);
-		f.show();
+		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

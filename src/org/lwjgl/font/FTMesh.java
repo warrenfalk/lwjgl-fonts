@@ -24,12 +24,12 @@ public class FTMesh
 	/**
 	 * Holds each sub mesh that comprises this glyph.
 	 */
-	private List tesselationList;
+	private List<FTTesselation> tesselationList;
 
 	/**
 	 * Holds extra points created by gluTesselator. See ftglCombine.
 	 */
-	private List tempPointList;
+	private List<double[]> tempPointList;
 
 	/**
 	 * GL ERROR returned by the glu tesselator
@@ -43,10 +43,10 @@ public class FTMesh
 	{
 		this.currentTesselation = null;
 		this.err = 0;
-		ArrayList help = new ArrayList();
+		ArrayList<FTTesselation> help = new ArrayList<FTTesselation>();
 		help.ensureCapacity(16);
 		tesselationList = help;
-		this.tempPointList = new LinkedList();
+		this.tempPointList = new LinkedList<double[]>();
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class FTMesh
 	{
 		for (int t = 0; t < this.tesselationList.size(); ++t)
 		{
-			((FTTesselation)this.tesselationList.get(t)).dispose();
+			this.tesselationList.get(t).dispose();
 		}
 		this.tesselationList.clear();
 		this.tempPointList.clear();
@@ -130,13 +130,13 @@ public class FTMesh
 	 */
 	public FTTesselation getTesselation(int index) // const;
 	{
-		return (FTTesselation)this.tesselationList.get(index);
+		return this.tesselationList.get(index);
 	}
 
 	/**
 	 * 
 	 */
-	public List getTempPointList() // const
+	public List<double[]> getTempPointList() // const
 	{
 		return this.tempPointList;
 	}

@@ -153,7 +153,7 @@ public class Tools
 	 * @param c the class
 	 * @return the name of the class
 	 */
-	public static String getClassName(Class c)
+	public static String getClassName(Class<?> c)
 	{
 		String n = c.getName();
 		int i = n.lastIndexOf('.');

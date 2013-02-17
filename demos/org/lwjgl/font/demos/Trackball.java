@@ -98,9 +98,6 @@ public class Trackball extends MouseAdapter implements MouseMotionListener
 	 */
 	public final static float TRACKBALLSIZE = 0.4f;
 
-	/* globals */
-	private long    tb_lasttime;
-
 	Quaternion curquat = new Quaternion();
 	Quaternion lastquat = new Quaternion();
 	int beginx, beginy;

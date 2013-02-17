@@ -714,7 +714,7 @@ public class FTGLDemo implements ActionListener
 		frame.setBounds(50, 50, width, height);
 
 		String [] allfonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-		JComboBox box = new JComboBox(allfonts);
+		JComboBox<String> box = new JComboBox<String>(allfonts);
 		
 		final Canvas drawable = new Canvas();
 		final AtomicReference<Dimension> newCanvasSize = new AtomicReference<Dimension>();
@@ -846,7 +846,8 @@ public class FTGLDemo implements ActionListener
 	{
 		if (e.getSource() instanceof JComboBox)
 		{
-			JComboBox b = (JComboBox) e.getSource();
+			@SuppressWarnings("unchecked")
+			JComboBox<String> b = (JComboBox<String>) e.getSource();
 			String selfont = b.getSelectedItem().toString();
 			System.out.println(selfont);
 			this.updateFontTo = Font.decode(selfont).deriveFont(72f);

@@ -15,7 +15,7 @@ import org.lwjgl.font.glyph.FTGlyph;
 public class FTGlyphContainer
 {
 
-	private HashMap cache = new HashMap();
+	private HashMap<Integer, FTGlyph> cache = new HashMap<Integer, FTGlyph>();
 
 	/**
 	 * Current error code. Zero means no error.
@@ -37,10 +37,10 @@ public class FTGlyphContainer
 	 */
 	public void clear()
 	{
-		Iterator i = this.cache.values().iterator();
+		Iterator<FTGlyph> i = this.cache.values().iterator();
 		while (i.hasNext())
 		{
-			((FTGlyph)i.next()).dispose();
+			i.next().dispose();
 		}
 		this.cache.clear();
 	}
@@ -62,14 +62,14 @@ public class FTGlyphContainer
 	 */
 	public final FTGlyph glyph(final int characterCode)
 	{
-		return (FTGlyph)this.cache.get(new Integer(characterCode));
+		return this.cache.get(new Integer(characterCode));
 	}
 
 	/**
 	 * Returns an Iterator with which to iterate through all glyphs, cached in this container.
 	 * @return An Iterator with which to iterate through all glyphs.
 	 */
-	public Iterator getGlyphs()
+	public Iterator<FTGlyph> getGlyphs()
 	{
 		return this.cache.values().iterator();
 	}

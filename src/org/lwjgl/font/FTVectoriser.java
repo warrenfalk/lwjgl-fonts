@@ -41,7 +41,7 @@ public class FTVectoriser
 	/**
 	 * The list of contours in the glyph
 	 */
-	private List contourList = new ArrayList(2);
+	private List<FTContour> contourList = new ArrayList<FTContour>(2);
 
 	/**
 	 * A Mesh for tesselations
@@ -133,7 +133,7 @@ public class FTVectoriser
 
 		for (int c = 0; c < this.contourCount(); ++c)
 		{
-			final FTContour contour = (FTContour)contourList.get(c);
+			final FTContour contour = contourList.get(c);
 
 			tobj.gluTessBeginContour();
 
@@ -194,7 +194,7 @@ public class FTVectoriser
 	public final FTContour contour(int index)
 	{
 		//return (index < this.contourCount()) ? this.contourList[index] : null;
-		return (FTContour)this.contourList.get(index);
+		return this.contourList.get(index);
 	}
 
 	/**

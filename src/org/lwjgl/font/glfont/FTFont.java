@@ -115,9 +115,9 @@ public abstract class FTFont
 	
 	public void init() // TODO: rename
 	{
-		Iterator i = this.glyphCache.getGlyphs();
+		Iterator<FTGlyph> i = this.glyphCache.getGlyphs();
 		while(i.hasNext()){
-			((FTGlyph) i.next()).init();
+			i.next().init();
 		}
 	}
 

@@ -35,7 +35,7 @@ public class FTContour
 
 	/** 2D array storing values of de Casteljau algorithm. */
 	private double[][] controlPoints = new double[4][2];
-	private List pointlist = new Vector();
+	private List<double[]> pointlist = new Vector<double[]>();
 	private float stepSize = BEZIER_STEP_SIZE;
 	private float lastStep = 0;
 
@@ -150,7 +150,7 @@ public class FTContour
 	 */
 	public final double[] getPoint(int index)
 	{
-		return (double[])this.pointlist.get(index);
+		return this.pointlist.get(index);
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class FTContour
 	 */
 	private final void addPoint(final double[] point)
 	{
-		if (this.pointlist.isEmpty() || !equals(point, (double[])this.pointlist.get(this.pointlist.size() - 1)))
+		if (this.pointlist.isEmpty() || !equals(point, this.pointlist.get(this.pointlist.size() - 1)))
 		{
 			this.pointlist.add(point);
 		}

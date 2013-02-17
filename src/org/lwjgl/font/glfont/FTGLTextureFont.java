@@ -43,7 +43,7 @@ public class FTGLTextureFont extends FTFont
 	/**
 	 * An array of texture ids
 	 */
-	private List textureIDList = new LinkedList();
+	private List<IntBuffer> textureIDList = new LinkedList<IntBuffer>();
 
 	/**
 	 * The max height for glyphs in the current font
@@ -158,7 +158,7 @@ public class FTGLTextureFont extends FTFont
 		int size = this.textureIDList.size();
 		IntBuffer textureIDs = ByteBuffer.allocateDirect(size * 4).order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
 		for (int i = 0; i < size; i++)
-			textureIDs.put(((int[])this.textureIDList.get(i))[0]);
+			textureIDs.put(this.textureIDList.get(i).get(0));
 		textureIDs.flip();
 		GL11.glDeleteTextures(textureIDs);
 		this.textureIDList.clear();
@@ -300,7 +300,7 @@ public class FTGLTextureFont extends FTFont
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); // GL_ONE
 			GL11.glDepthFunc(GL11.GL_ALWAYS);
-			int textureID = ((int[])this.textureIDList.get(index))[0];
+			int textureID = this.textureIDList.get(index).get(0);
 			int[] activeTextureID = new int[1];
 			activeTextureID[0] = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
 			if(activeTextureID[0] != textureID)
